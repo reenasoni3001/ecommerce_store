@@ -7,14 +7,13 @@ import Products from "./Products";
 
 const ProductList = () => {
   const products = useSelector((state) => state.products);
-  console.log(products);
+  //console.log(products);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const count = Math.ceil(products.products.length / itemsPerPage);
   const currentItems = usePagination(products.products, itemsPerPage);
-  console.log(currentItems);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,12 +39,12 @@ const ProductList = () => {
       {!products.loading && products.products.length ? (
         <Grid
           container
-          justifyContent="space-around"
-          display={"flex"}
+          //justifyContent="space-around"
+          display="flex"
           flexWrap="wrap"
         >
           {currentItems.currentData().map((prod) => (
-            <Grid item key={prod.id}>
+            <Grid item key={prod.id} p={2}>
               <Products product={prod} />
             </Grid>
           ))}

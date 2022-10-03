@@ -26,22 +26,39 @@ const ExpandMore = styled((props) => {
 export default function Products({ product }) {
   const [expanded, setExpanded] = React.useState(false);
 
+  const [sold, setSold] = React.useState(false);
+
+  const soldOut = () => {
+    if (product.id === 1 || product.id === 3 || product.id === 5) {
+      setSold(true);
+    }
+  };
+
+  React.useEffect(() => {
+    setTimeout(() => soldOut(), 60000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: 245 }}>
+    <Card sx={{ maxWidth: 200 }}>
       <CardHeader
         variant="h6"
-        title={product.title}
+        title={
+          product.title.length > 20
+            ? `${product.title.substring(0, 20)}...`
+            : product.title
+        }
         subheader={product.category}
       />
       <CardMedia
         component="img"
-        height="fit-content"
         image={product.image}
         alt="product images"
+        height="200"
+        width="200"
       />
       <CardContent>
         <Typography color="text.secondary">Price : ${product.price}</Typography>
@@ -50,9 +67,13 @@ export default function Products({ product }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <ShoppingCart />
-        </IconButton>
+        {sold ? (
+          "Sold Out "
+        ) : (
+          <IconButton aria-label="add to favorites">
+            <ShoppingCart />
+          </IconButton>
+        )}
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
