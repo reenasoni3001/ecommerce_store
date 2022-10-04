@@ -12,6 +12,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useSelector } from "react-redux";
+import CartItems from "./CartItems";
+import { Grid } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -123,7 +125,19 @@ export default function NavBar() {
           "aria-labelledby": "basic-button",
         }}
       >
-        Your cart is empty!
+        <MenuItem>
+          <Grid container flexDirection="row">
+            {cart.length <= 0 ? (
+              "Your cart is empty!"
+            ) : (
+              <Grid item>
+                {cart.cart.map((item) => (
+                  <CartItems item={item} key={item.id} />
+                ))}
+              </Grid>
+            )}
+          </Grid>
+        </MenuItem>
       </Menu>
     </Box>
   );
