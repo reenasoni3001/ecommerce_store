@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ShoppingCart } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../features/addToCartSlice";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -25,6 +27,7 @@ const ExpandMore = styled((props) => {
 
 export default function Products({ product }) {
   const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
 
   const [sold, setSold] = React.useState(false);
 
@@ -70,7 +73,10 @@ export default function Products({ product }) {
         {sold ? (
           "Sold Out "
         ) : (
-          <IconButton aria-label="add to favorites">
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => dispatch(addToCart(product))}
+          >
             <ShoppingCart />
           </IconButton>
         )}

@@ -9,6 +9,9 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,6 +54,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  // const [search, setSearch] = React.useState("");
+
+  // function handleChange(e) {
+  //   setSearch(e.target.value);
+
+  // }
+
+  const cart = useSelector((state) => state.addToCart);
+  console.log(cart);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -78,8 +100,13 @@ export default function NavBar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={cart.cart.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -87,6 +114,17 @@ export default function NavBar() {
           <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
         </Toolbar>
       </AppBar>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        Your cart is empty!
+      </Menu>
     </Box>
   );
 }
