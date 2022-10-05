@@ -8,12 +8,22 @@ import Products from "./Products";
 const ProductList = () => {
   const products = useSelector((state) => state.products);
   //console.log(products);
-
+  const searchQuery = useSelector((state) => state.search);
+  console.log(searchQuery);
+  //const searchQuery = "";
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const count = Math.ceil(products.products.length / itemsPerPage);
   const currentItems = usePagination(products.products, itemsPerPage);
+
+  const filteredItems = searchQuery
+    ? currentItems
+        .currentData()
+        .filter((product) =>
+          product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    : currentItems.currentData();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,7 +53,7 @@ const ProductList = () => {
           display="flex"
           flexWrap="wrap"
         >
-          {currentItems.currentData().map((prod) => (
+          {filteredItems.map((prod) => (
             <Grid item key={prod.id} p={2}>
               <Products product={prod} />
             </Grid>
