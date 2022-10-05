@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ShoppingCart } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../features/addToCartSlice";
 
 const ExpandMore = styled((props) => {
@@ -38,9 +38,10 @@ export default function Products({ product }) {
   };
 
   React.useEffect(() => {
-    setTimeout(() => soldOut(), 60000);
+    setTimeout(soldOut, 60000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -64,14 +65,29 @@ export default function Products({ product }) {
         width="200"
       />
       <CardContent>
-        <Typography color="text.secondary">Price : ${product.price}</Typography>
+        {product.id === 6 ? (
+          <div style={{ display: "flex" }}>
+            Price :
+            <Typography sx={{ textDecorationLine: "line-through" }}>
+              ${product.price}
+            </Typography>
+            <Typography marginLeft={1}>
+              {product.price - product.price * (5 / 100)}
+            </Typography>
+          </div>
+        ) : (
+          <Typography color="text.secondary">
+            Price : ${product.price}
+          </Typography>
+        )}
+
         <Typography color="text.secondary">
           Rating : {product.rating.rate}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         {sold ? (
-          "Sold Out "
+          <Typography>Sold out</Typography>
         ) : (
           <IconButton
             aria-label="add to favorites"

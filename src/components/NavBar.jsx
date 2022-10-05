@@ -11,9 +11,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartItems from "./CartItems";
 import { Grid } from "@mui/material";
+import { searchQuery } from "../features/searchSlice";
+import { debounce } from "lodash";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,15 +58,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
-  // const [search, setSearch] = React.useState("");
+  const dispatch = useDispatch();
 
-  // function handleChange(e) {
-  //   setSearch(e.target.value);
+  function handleChange(e) {
+    dispatch(searchQuery(e.target.value));
+  }
 
-  // }
+  const debounced = debounce(handleChange, 1000);
 
   const cart = useSelector((state) => state.addToCart);
-  console.log(cart);
+  //console.log(cart);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -94,6 +97,7 @@ export default function NavBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={debounced}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

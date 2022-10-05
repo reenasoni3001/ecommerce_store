@@ -33,9 +33,3 @@ export default function CartItems({ item }) {
     </Card>
   );
 }
-
-// const CartItems = () => {
-//   return <div>CartItems</div>;
-// };
-
-// export default CartItems;

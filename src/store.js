@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { searchReducer } from "./features/searchSlice";
 
 const persistConfig = {
   key: "root",
@@ -19,17 +20,11 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, cartReducer);
 
-// export const store = configureStore({
-//   reducer: {
-//     products: productReducer,
-//     addToCart: cartReducer,
-//   },
-// });
-
 export const store = configureStore({
   reducer: {
     products: productReducer,
     addToCart: persistedReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
