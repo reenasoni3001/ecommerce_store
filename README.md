@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Ecommerce Store
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+Below are the details of the features used to build this application:
 
-### `npm start`
+### Used Material UI components for Building Header and cards.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Implemented Ecommerce store using MUI components-
+![image1](https://user-images.githubusercontent.com/41507972/194065363-6a66afd3-3c10-4c09-9664-f0792e9a471e.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Added AddToCart Feature using Redux toolkit and Redux persist
 
-### `npm test`
+User can add the items to the cart and can view it. The items in the cart persist on page reloads.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image2](https://user-images.githubusercontent.com/41507972/194066262-6b122233-f02f-4ed3-a651-2eed2473d613.png)
 
-### `npm run build`
+### Implemented SoldOut Feature
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app displays sold out for the product id 1, 3 and 5 after 1 minute of page reload.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image3](https://user-images.githubusercontent.com/41507972/194066689-59bc5ff0-3bfb-40f7-b464-c627efe0c9af.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Strike through for products ids which are prime
 
-### `npm run eject`
+All product ids which are prime should show the strike off price of 5% of the actual price.
+![image4](https://user-images.githubusercontent.com/41507972/194066995-eccde48c-5fed-4ed3-8217-0d26e31b0d6d.png
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Search functionality with debounce using lodash
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Implement a search on products, and should have debounce functionality with it.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Screenshot (5)](https://user-images.githubusercontent.com/41507972/194067550-72684b6e-6b74-40cf-afb7-d6923fbaddb8.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Pagination
 
-## Learn More
+created custom hook for implementing pagination.Products landing page has pagination, eg. each page with 10 products.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Screenshot (6)](https://user-images.githubusercontent.com/41507972/194067863-f84d6649-8376-4e11-98ed-b4fb95c59a9d.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Fetched data from API using createAsyncThunk
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+using redux toolkit implemented productSlice and fetched data using createAsyncThunk and axios.
