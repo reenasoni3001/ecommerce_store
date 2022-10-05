@@ -65,14 +65,14 @@ export default function Products({ product }) {
         width="200"
       />
       <CardContent>
-        {product.id === 6 ? (
+        {product.id > 1 && product.id % 2 === 1 ? (
           <div style={{ display: "flex" }}>
-            Price :
+            <Typography> Price :</Typography>
             <Typography sx={{ textDecorationLine: "line-through" }}>
               ${product.price}
             </Typography>
             <Typography marginLeft={1}>
-              {product.price - product.price * (5 / 100)}
+              ${product.price - product.price * (5 / 100)}
             </Typography>
           </div>
         ) : (
